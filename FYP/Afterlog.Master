@@ -1,0 +1,55 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Afterlog.master.cs" Inherits="FYP.Afterlog" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="Content/afterlog.css"/>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style2 {
+            font-size: medium;
+        }
+        .auto-style3 {
+            left: 0px;
+            top: 0px;
+            height: 57px;
+        }
+        .auto-style4 {
+            text-align: right;
+        }
+        .auto-style5 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    
+        
+            
+<div id="fixedheader" class="auto-style3"><h3 class="auto-style4">COGENT analytics&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WELCOME&nbsp; </span> 
+    
+        <asp:Label ID="Name" runat="server" Text="Label" CssClass="auto-style2"></asp:Label>
+    
+    &nbsp;&nbsp; |&nbsp;<asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Logout" CssClass="danger" BackColor="Black" BorderWidth="0px" ForeColor="White" />
+                    &nbsp;</h3>
+    <h2>&nbsp;</h2></div>
+
+        <asp:Label ID="Label1" runat="server" Visible="false"></asp:Label>
+
+
+
+<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        <p>
+            &nbsp;</p>
+        </asp:ContentPlaceHolder>
+      
+    
+   
+    <div id="fixedfooter" class="auto-style5">@All rights reserved,Cogent analytics</div>
+        </form>
+</body>
+</html>

@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Session</title>
+	<meta charset = "utf-8">
+	<script src = "../cogentapp/Scripts/d3.min.js"></script>
+	<style type="text/css">
+    
+	circle
+	{
+		fill: none;
+		stroke-width: 3px;
+	}
+	</style>
+	</head>
+<body>
+<script type="text/javascript">
+var svg = d3.select("body").append("svg").attr("width",2400).attr("height",1000);
+var XScale = d3.scale.linear()
+.domain([01,12])
+.range([300,1950]);
+var YScale = d3.scale.linear()
+.domain([2013,2015])
+.range([700,200]);
+var colorScale = d3.scale.category10();
+function render(data){
+//BIND data
+//XScale.domain(d3.extent(data, function (d){return d[xColmun];}));
+var circles = svg.selectAll("circle").data(data);
+//Update
+circles.enter().append("circle")
+.attr("r",function (d){ return d.Sessions;	})
+.attr("cx",function (d){
+	//console.log(d.Date);
+	for(var i = 1;i<=3;i++){
+	d.Date = d.Date.replace("/"," ");};
+	//d.Date = d.Date.replace("/"," ");
+	//d.Date = d.Date.replace("/"," ");
+	d.Date = d.Date.replace(/\s/g,'');
+	var month = d.Date.substring(2, 4);
+	//console.log(month);
+	month = parseFloat(month);
+	//d.Date = parseFloat(d.Date);
+	//console.log(XScale(month));
+	var month_scaled = XScale(month);
+	var day = d.Date.substring(0,2);
+	//console.log(day);
+	var xValue = XScale(month);
+	xValue = xValue+(day*5);
+	//console.log(xValue);
+	return xValue;
+})
+.attr("cy",function (d){
+	//console.log(d.Date);
+	for(var i = 1;i<=3;i++){
+	d.Date = d.Date.replace("/"," ");};
+	d.Date = d.Date.replace(/\s/g,'');
+	var year = d.Date.substring(4, 8);
+	//console.log(year);
+	year = parseFloat(year);
+	//d.Date = parseFloat(d.Date);
+	//console.log(XScale(month));
+	return YScale(year);
+})
+.attr("stroke", function (d){
+	for(var i = 1;i<=3;i++){
+	d.Date = d.Date.replace("/"," ");};
+	d.Date = d.Date.replace(/\s/g,'');
+	var year = d.Date.substring(4, 8);
+	//console.log(year);
+	year = parseFloat(year);
+	return colorScale(year);
+});
+
+
+circles.exit().remove();
+}
+
+var rectangle = svg.append("rect")
+	.attr("x",120)
+	.attr("y",30)
+	.attr("width",10)
+	.attr("height",850)
+	.attr("fill","gray");
+
+
+var rectangle = svg.append("rect")
+	.attr("x",120)
+	.attr("y",870)
+	.attr("width",2200)
+	.attr("height",10)
+	.attr("fill","gray");
+
+var textLabels = svg.append("text")
+                .attr("x", "400")
+                .attr("y", "920")
+                .text("Jan")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080")
+                .on("mouseover", function(d) {
+                      d3.select(this).style("fill", "red")
+                }
+               /* ,function setCursorByID(id,cursorStyle) {
+                    var elem;
+                    if (document.getElementById &&
+                       (elem=document.getElementById(id)) ) {
+                        if (elem.style) elem.style.cursor="pointer";
+                    }
+                }
+    */)
+                .on("mouseout", function (d) {
+                    d3.select(this).style("fill", null)
+                })
+                .on("click", function () { window.open("Jan.html"); });
+
+ var textLabels = svg.append("text")
+                .attr("x", "557.5")
+                .attr("y", "920")
+                .text("Feb")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+ var textLabels = svg.append("text")
+                .attr("x", "695")
+                .attr("y", "920")
+                .text("Mar")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+
+var textLabels = svg.append("text")
+                .attr("x", "832.5")
+                .attr("y", "920")
+                .text("Apr")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+var textLabels = svg.append("text")
+                .attr("x", "970")
+                .attr("y", "920")
+                .text("May")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");                
+
+var textLabels = svg.append("text")
+                .attr("x", "1107.5")
+                .attr("y", "920")
+                .text("Jun")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+var textLabels = svg.append("text")
+                .attr("x", "1245")
+                .attr("y", "920")
+                .text("Jul")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+var textLabels = svg.append("text")
+                .attr("x", "1382.5")
+                .attr("y", "920")
+                .text("Aug")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+var textLabels = svg.append("text")
+                .attr("x", "1520")
+                .attr("y", "920")
+                .text("Sep")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+var textLabels = svg.append("text")
+                .attr("x", "1657.5")
+                .attr("y", "920")
+                .text("Oct")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+var textLabels = svg.append("text")
+                .attr("x", "1795")
+                .attr("y", "920")
+                .text("Nov")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+var textLabels = svg.append("text")
+                .attr("x", "1932.5")
+                .attr("y", "920")
+                .text("Dec")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");       
+
+//Y-AXIS
+var textLabels = svg.append("text")
+                .attr("x", "50")
+                .attr("y", "750")
+                .text("2013")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");  
+
+var textLabels = svg.append("text")
+                .attr("x", "50")
+                .attr("y", "470")
+                .text("2014")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+
+var textLabels = svg.append("text")
+                .attr("x", "50")
+                .attr("y", "180")
+                .text("2015")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "30px")
+                .attr("fill", "#800080");
+
+var scale = d3.scale.linear()//it will scale the number of session according to need
+	.domain ([0,50000])//domain specifies how much big number can be scaled
+	.range ([5,300]);// range will tell number of pixels of scaling
+
+function type (d){
+	d.Sessions = parseFloat (d.Sessions);
+	d.Sessions = scale(d.Sessions);
+	console.log (d.Sessions);
+	return d;
+}
+
+d3.csv("../cogentapp/AppData/NRXFree-2015_09_22-sessions.csv", type, function (myArrayofObjects) {
+	render(myArrayofObjects);
+});
+
+</script>
+</body>
+</html>
+

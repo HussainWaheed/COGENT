@@ -1,0 +1,22 @@
+﻿body {
+   background-color:#567;
+}
+/*.YourButtonStyle
+     {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }*/
+
+.jumbotron{
+    background-color:#fefbfb;
+    
+   /*margin-left:50%;
+   margin-right:50%;*/
+  
+}
+#log1{
+    height:2px;
+    align-self:auto;
+}

@@ -1,0 +1,24 @@
+﻿body {
+    background-color: #faf7f7 !important;
+	margin:80px 80px 100px 100px;
+}
+div#fixedheader {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	color:#CCC;
+	background:#333;
+    background-color:#000000 !important;
+    border:3px;
+}
+div#fixedfooter {
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	color:#CCC;
+	background:#333;
+    background-color:#000000 !important;
+	padding:8px;
+}

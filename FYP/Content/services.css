@@ -1,0 +1,15 @@
+﻿body {
+   background-image:url(../Images/dani3.jpg);
+   
+}
+
+/*.auto-style2:hover{
+    color:aliceblue;
+
+
+}*/
+
+table tr td:hover{
+background-color:#0026ff;/*green*/
+//color:#ffffff; /*white text*/
+}

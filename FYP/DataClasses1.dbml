@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Analytics" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=AHMAD;Initial Catalog=Analytics;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AnalyticsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.admin" Member="admins">
+    <Type Name="admin">
+      <Column Name="admin_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="user_data_admin" Member="user_data" ThisKey="user_id" OtherKey="id" Type="user_data" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.user_games" Member="user_games">
+    <Type Name="user_game">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="game_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.games" Member="games">
+    <Type Name="game">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Api_path" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="user_data_game" Member="user_data" ThisKey="UserID" OtherKey="id" Type="user_data" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.suggestion" Member="suggestions">
+    <Type Name="suggestion">
+      <Column Name="message_box" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Full_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="user_data_suggestion" Member="user_data" ThisKey="user_id" OtherKey="id" Type="user_data" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Table]" Member="Tables">
+    <Type Name="Table">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Api_path" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.user_data" Member="user_datas">
+    <Type Name="user_data">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="user_country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="user_application" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="user_image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="user_password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="user_email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="user_c_password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="user_data_admin" Member="admins" ThisKey="id" OtherKey="user_id" Type="admin" />
+      <Association Name="user_data_game" Member="games" ThisKey="id" OtherKey="UserID" Type="game" />
+      <Association Name="user_data_suggestion" Member="suggestions" ThisKey="id" OtherKey="user_id" Type="suggestion" />
+    </Type>
+  </Table>
+</Database>

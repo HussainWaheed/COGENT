@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>January Sessions</title>
+	<meta charset="utf-8" />
+    <script src="../cogentapp/Scripts/d3.min.js"></script>
+    <style type="text/css">
+        /*CSS will be typed HERE*/
+        /*rect {
+  fill-opacity: .6;
+  fill: #e377c2;
+}*/
+    </style>
+</head>
+<body> 
+    <p>
+        <label for="nValue"
+               style="display: inline-block; width: 240px; text-align: right">
+            ENTER YEAR = <span id="nValue-value"></span>
+        </label>
+        <input type="number" min="2013" max="2015" step="1" value="2014" id="nValue">
+    </p>
+    <p>
+        <label for="nValue1"
+               style="display: inline-block; width: 240px; text-align: right">
+            ENTER MONTH Number = <span id="nValue-value"></span>
+        </label>
+        <input type="number" min="01" max="12" step="1" value="01" id="nValue1">
+    </p>
+    <script type="text/javascript">
+        //If input will changes years
+        d3.select("#nValue").on("input", function () {
+            default_Year = +this.value;
+            d3.selectAll("svg").remove();
+            main();
+        });
+        //If input will changes of Months
+        d3.select("#nValue1").on("input", function () {
+            default_Month = +this.value;
+            d3.selectAll("svg").remove();
+            main();
+        });
+        main();
+        var default_Year = 2014;//This is a Global variable which will be changed on the user changing of year
+        var default_Month = 01;
+function main(){ //MAIN IN WHICH ALL PROGRAM IS RUNNING
+        var margin = {
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 60
+        },
+            width = 800 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
+
+        //Xscale Set here
+        var x = d3.scale.linear()
+            .range([0, width - margin.right],5);
+      
+        //Yscale set here
+        var y = d3.scale.linear()
+            .range([height, 0]);
+        //ColorScale
+        var colorScale = d3.scale.category10();
+        //Bottom Axis Settings using x scale
+        var xAxis = d3.svg.axis()
+            .scale(x)
+           // .tickValues(x)
+            .orient("bottom");
+
+
+        // Y xis settings using y scale
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .tickFormat(d3.format("2s"));
+
+        //Adding SVG ELEMENT on which the Graph will be Drawn
+        var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+       
+
+        //main();
+        //function main() {
+
+
+            d3.csv("../cogentapp/AppData/NRXFree-2015_09_22-sessions.csv", function (csv) {
+                data = csv;
+                var semifiltereddata = data.filter(function (d) {
+                    var month = d.Date.substring(3, 5);
+                    var year = d.Date.substring(6, 10);
+                    if (month == default_Month && year == default_Year) {
+                        //console.log(toreturn);
+                        //  filtered_data = filtered_data   +  { Date: d.Date, Sessions: d.Sessions };
+                        return d;
+                    }
+                });
+
+                semifiltereddata.reverse();
+                console.log(semifiltereddata);
+                //setting the scale for setting a scale
+                draw(semifiltereddata);
+            });
+        //}
+
+        function draw(d) {
+
+            //Scale Data set scale for the every month and then it will be drawn
+            //Domain Settings only
+            //x.domain(d.map(function (d) {
+            //    var day = d.Date.substring(0, 2);
+            //    //console.log(day);
+            //    return parseFloat(day);
+            //}));
+
+            x.domain([01, d3.max(d, function (t) {
+                return parseFloat(t.Date.substring(0, 2));
+            })]);
+            
+            //Setting Y-Axis Domain
+            y.domain([0,d3.max(d, function (t) {
+                var sess = t.Sessions;
+                //console.log(sess);
+                sess = +sess;
+                return sess;
+            })]);
+
+            svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis)
+            .append("text")
+             //.attr("transform", "rotate(-90)")
+             .attr("x", 715)
+             .attr("y",30)
+             //.attr("dx", ".71em")
+             .style("text-anchor", "end")
+             .text("Date");
+
+             svg.append("g")
+             .attr("class", "y axis")
+             .call(yAxis)
+             .append("text")
+             .attr("transform", "rotate(-90)")
+             .attr("y",-50)
+             .attr("dy", ".71em")
+             .style("text-anchor", "end")
+             .text("Sessions");
+
+            
+             console.log("a");
+            //Drawing will start from here
+             var HScale = d3.scale.linear()
+            .domain([0, d3.max(y.domain())])
+            .range([0, height]);
+
+             svg.selectAll("rect")
+             .data(d)
+             .enter()
+             .append("rect")
+             .attr("x", function (d) { return x(parseFloat(d.Date.substring(0, 2))); })
+             .attr("y", function (d) {
+                 return height - HScale(d.Sessions);
+             })
+             .attr("width", 20)
+             .attr("height", function (d) {
+                 //console.log(d3.max(y.domain()));
+                 //Height Scale will be set here
+
+                 console.log(HScale(0));
+                 // var s = y(d.Sessions);
+                 return HScale(d.Sessions);
+             })
+             .attr("fill", function (d) {
+                
+                 var day = d.Date.substring(0, 2);
+                 day = parseFloat(day);
+                 return colorScale(day);
+             });
+           
+          
+
+        }
+        //var txt = {01:"January",02:"February"}
+        //svg.append("text")
+        //.attr("x", "margin.left")
+        ////.attr("y", "height")
+        //.text("The Graph of " + );
+        }
+    </script>
+   
+</body>
+</html>
